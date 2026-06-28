@@ -38,11 +38,6 @@ st.markdown("""
         margin-top: 15px;
         box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.5);
     }
-    /* Estilo para ocultar el reproductor nativo feo y dejar solo el flujo de audio */
-    audio {
-        width: 100%;
-        margin-top: 10px;
-    }
     </style>
     """, unsafe_allow_html=True)
 
@@ -66,22 +61,10 @@ frecuencia = st.slider(
 
 st.markdown("---")
 
-# Base URL para los archivos Raw de tu repositorio de GitHub con doble extensión
+# Base URL para los archivos Raw de tu repositorio de GitHub
 REPO_RAW_URL = "https://raw.githubusercontent.com/frosly/radiotelescopio-lui/main/"
 
-# Función optimizada para renderizar el audio nativo en bucle y autoreproducción
-def reproducir_audio_pro(nombre_archivo):
-    enlace_directo = REPO_RAW_URL + nombre_archivo
-    # El atributo 'autoplay' arranca la canción sola, 'loop' la hace infinita y 'controls' muestra la barra de reproducción
-    componente_html = f"""
-    <audio autoplay loop controls preload="auto">
-        <source src="{enlace_directo}" type="audio/mpeg">
-        Tu navegador no soporta la reproducción de audio cósmico.
-    </audio>
-    """
-    st.markdown(componente_html, unsafe_allow_html=True)
-
-# Lógica del Radiotelescopio con mapeo directo
+# Lógica del Radiotelescopio
 if frecuencia == 100.5:
     st.success("🛰️ ¡SEÑAL DETECTADA: Frecuencia de Inicio de Órbita (29/06/2025)!")
     st.balloons() 
@@ -96,7 +79,7 @@ if frecuencia == 100.5:
     </div>
     """, unsafe_allow_html=True)
     st.write("🎵 *Sintonizando: Little Things - One Direction*")
-    reproducir_audio_pro("1d_little_things.mp3.mp3")
+    st.audio(REPO_RAW_URL + "1d_little_things.mp3.mp3")
 
 elif frecuencia == 102.0:
     st.success("🛰️ ¡SEÑAL DETECTADA: Frecuencia de la Primera Cita (20/08/2025)!")
@@ -111,7 +94,7 @@ elif frecuencia == 102.0:
     </div>
     """, unsafe_allow_html=True)
     st.write("🎵 *Sintonizando: I Want to Write You a Song - One Direction*")
-    reproducir_audio_pro("1d_write_a_song.mp3.mp3")
+    st.audio(REPO_RAW_URL + "1d_write_a_song.mp3.mp3")
 
 elif frecuencia == 101.7:
     st.success("🛰️ ¡SEÑAL DETECTADA: Frecuencia del Gran Impacto (17/01/2026)!")
@@ -126,7 +109,7 @@ elif frecuencia == 101.7:
     </div>
     """, unsafe_allow_html=True)
     st.write("🎵 *Sintonizando: Half a Heart - One Direction*")
-    reproducir_audio_pro("1d_half_a_heart.mp3.mp3")
+    st.audio(REPO_RAW_URL + "1d_half_a_heart.mp3.mp3")
 
 elif frecuencia == 102.7:
     st.success("🛰️ ¡SEÑAL DETECTADA: Frecuencia de la Estrella Más Brillante (07/02)!")
@@ -141,7 +124,7 @@ elif frecuencia == 102.7:
     </div>
     """, unsafe_allow_html=True)
     st.write("🎵 *Sintonizando: Night Changes - One Direction*")
-    reproducir_audio_pro("1d_night_changes.mp3.mp3")
+    st.audio(REPO_RAW_URL + "1d_night_changes.mp3.mp3")
 
 elif frecuencia == 104.2:
     st.success("🛰️ ¡SEÑAL DETECTADA: Frecuencia del Combustible Espacial!")
@@ -156,7 +139,7 @@ elif frecuencia == 104.2:
     </div>
     """, unsafe_allow_html=True)
     st.write("🎵 *Sintonizando: If I Could Fly - One Direction*")
-    reproducir_audio_pro("1d_if_i_could_fly.mp3.mp3")
+    st.audio(REPO_RAW_URL + "1d_if_i_could_fly.mp3.mp3")
 
 else:
     # Ruido cósmico por defecto
@@ -168,7 +151,7 @@ else:
     """, unsafe_allow_html=True)
     
     st.write("📻 *Interceptando señal de fondo:*")
-    reproducir_audio_pro("btr_ikyk.mp3.mp3")
+    st.audio(REPO_RAW_URL + "btr_ikyk.mp3.mp3")
 
 # Pie de página fijo
 st.markdown("<br><br><p style='text-align: center; color: #475569; font-size: 0.8rem;'>Hecho con 💛 por tu nenito para su reina Luisaury</p>", unsafe_allow_html=True)

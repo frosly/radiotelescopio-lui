@@ -1,6 +1,6 @@
 import streamlit as st
-import requests
 import base64
+import os
 
 # Configuración de la página
 st.set_page_config(
@@ -51,28 +51,24 @@ st.markdown("""
     </style>
     """, unsafe_allow_html=True)
 
-# Función infalible para reproducir audio descargando y convirtiendo a datos puros
-def reproducir_audio_infalible(url):
-    try:
-        # Descarga el archivo de audio en segundo plano directamente al servidor de Streamlit
-        response = requests.get(url, timeout=10)
-        if response.status_code == 200:
-            # Convierte los megabytes binarios a una cadena Base64 segura para navegadores
-            audio_base64 = base64.b64encode(response.content).decode('utf-8')
-            # Inserta un reproductor HTML puro que fuerza la carga de los datos locales
-            audio_html = f"""
-            <div class="audio-contenedor">
-                <audio controls autoplay>
-                    <source src="data:audio/mp3;base64,{audio_base64}" type="audio/mp3">
-                    Tu navegador no soporta este reproductor.
-                </audio>
-            </div>
-            """
-            st.markdown(audio_html, unsafe_allow_html=True)
-        else:
-            st.error("⚠️ Error de conexión con el satélite musical.")
-    except Exception as e:
-        st.error("📡 Buscando señal alternativa...")
+# Función definitiva para reproducir el archivo local convertido a Base64
+def reproducir_audio_local(nombre_archivo):
+    # Buscamos el archivo en la carpeta interna del servidor
+    if os.path.exists(nombre_archivo):
+        with open(nombre_archivo, "rb") as f:
+            audio_bytes = f.read()
+        audio_base64 = base64.b64encode(audio_bytes).decode('utf-8')
+        audio_html = f"""
+        <div class="audio-contenedor">
+            <audio controls autoplay>
+                <source src="data:audio/mp3;base64,{audio_base64}" type="audio/mp3">
+                Tu navegador no soporta este reproductor.
+            </audio>
+        </div>
+        """
+        st.markdown(audio_html, unsafe_allow_html=True)
+    else:
+        st.error(f"⚠️ El archivo '{nombre_archivo}' no se encuentra en el satélite. Verifica el nombre en GitHub.")
 
 # Encabezado de la App
 st.title("🌌 Observatorio Espacial Personalizado")
@@ -94,14 +90,14 @@ frecuencia = st.slider(
 
 st.markdown("---")
 
-# Servidores globales de música estables (Cero problemas de carga de archivos en GitHub)
+# Nombres exactos de tus archivos con el doble .mp3.mp3 que generó Windows
 CANCIONES = {
-    "1d_little_things": "https://pub-c5e31b5cdafb419a86a69d5d341ee602.r2.dev/One%20Direction%20-%20Little%20Things.mp3",
-    "1d_write_a_song": "https://pub-c5e31b5cdafb419a86a69d5d341ee602.r2.dev/One%20Direction%20-%20I%20Want%20to%20Write%20You%20a%20Song.mp3",
-    "1d_half_a_heart": "https://pub-c5e31b5cdafb419a86a69d5d341ee602.r2.dev/One%20Direction%20-%20Half%20a%20Heart.mp3",
-    "1d_night_changes": "https://pub-c5e31b5cdafb419a86a69d5d341ee602.r2.dev/One%20Direction%20-%20Night%20Changes.mp3",
-    "1d_if_i_could_fly": "https://pub-c5e31b5cdafb419a86a69d5d341ee602.r2.dev/One%20Direction%20-%20If%20I%20Could%20Fly.mp3",
-    "btr_real_ikyk": "https://pub-c5e31b5cdafb419a86a69d5d341ee602.r2.dev/Big%20Time%20Rush%20-%20I%20Know%20You%20Know.mp3"
+    "1d_little_things": "1d_little_things.mp3.mp3",
+    "1d_write_a_song": "1d_write_a_song.mp3.mp3",
+    "1d_half_a_heart": "1d_half_a_heart.mp3.mp3",
+    "1d_night_changes": "1d_night_changes.mp3.mp3",
+    "1d_if_i_could_fly": "1d_if_i_could_fly.mp3.mp3",
+    "btr_real_ikyk": "btr_ikyk.mp3.mp3"
 }
 
 # Lógica del Radiotelescopio
@@ -119,7 +115,7 @@ if frecuencia == 100.5:
     </div>
     """, unsafe_allow_html=True)
     st.write("🎵 *Sintonizando: Little Things - One Direction*")
-    reproducir_audio_infalible(CANCIONES["1d_little_things"])
+    reproducir_audio_local(CANCIONES["1d_little_things"])
 
 elif frecuencia == 102.0:
     st.success("🛰️ ¡SEÑAL DETECTADA: Frecuencia de la Primera Cita (20/08/2025)!")
@@ -134,7 +130,7 @@ elif frecuencia == 102.0:
     </div>
     """, unsafe_allow_html=True)
     st.write("🎵 *Sintonizando: I Want to Write You a Song - One Direction*")
-    reproducir_audio_infalible(CANCIONES["1d_write_a_song"])
+    reproducir_audio_local(CANCIONES["1d_write_a_song"])
 
 elif frecuencia == 101.7:
     st.success("🛰️ ¡SEÑAL DETECTADA: Frecuencia del Gran Impacto (17/01/2026)!")
@@ -149,7 +145,7 @@ elif frecuencia == 101.7:
     </div>
     """, unsafe_allow_html=True)
     st.write("🎵 *Sintonizando: Half a Heart - One Direction*")
-    reproducir_audio_infalible(CANCIONES["1d_half_a_heart"])
+    reproducir_audio_local(CANCIONES["1d_half_a_heart"])
 
 elif frecuencia == 102.7:
     st.success("🛰️ ¡SEÑAL DETECTADA: Frecuencia de la Estrella Más Brillante (07/02)!")
@@ -164,7 +160,7 @@ elif frecuencia == 102.7:
     </div>
     """, unsafe_allow_html=True)
     st.write("🎵 *Sintonizando: Night Changes - One Direction*")
-    reproducir_audio_infalible(CANCIONES["1d_night_changes"])
+    reproducir_audio_local(CANCIONES["1d_night_changes"])
 
 elif frecuencia == 104.2:
     st.success("🛰️ ¡SEÑAL DETECTADA: Frecuencia del Combustible Espacial!")
@@ -179,7 +175,7 @@ elif frecuencia == 104.2:
     </div>
     """, unsafe_allow_html=True)
     st.write("🎵 *Sintonizando: If I Could Fly - One Direction*")
-    reproducir_audio_infalible(CANCIONES["1d_if_i_could_fly"])
+    reproducir_audio_local(CANCIONES["1d_if_i_could_fly"])
 
 else:
     # Ruido cósmico por defecto
@@ -191,7 +187,7 @@ else:
     """, unsafe_allow_html=True)
     
     st.write("📻 *Interceptando señal de fondo:*")
-    reproducir_audio_infalible(CANCIONES["btr_real_ikyk"])
+    reproducir_audio_local(CANCIONES["btr_real_ikyk"])
 
 # Pie de página fijo
 st.markdown("<br><br><p style='text-align: center; color: #475569; font-size: 0.8rem;'>Hecho con 💛 por tu nenito para su reina Luisaury</p>", unsafe_allow_html=True)

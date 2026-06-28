@@ -61,8 +61,16 @@ frecuencia = st.slider(
 
 st.markdown("---")
 
-# Base URL para los archivos Raw de tu repositorio de GitHub
-REPO_RAW_URL = "https://raw.githubusercontent.com/frosly/radiotelescopio-lui/main/"
+# URLs de Streaming Directo de Alta Velocidad (Cero fallas de carga)
+CANCIONES = {
+    "btr_ikyk": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3", # Fondo por defecto temporal / Puedes usar cualquier link directo
+    "1d_little_things": "https://pub-c5e31b5cdafb419a86a69d5d341ee602.r2.dev/One%20Direction%20-%20Little%20Things.mp3",
+    "1d_write_a_song": "https://pub-c5e31b5cdafb419a86a69d5d341ee602.r2.dev/One%20Direction%20-%20I%20Want%20to%20Write%20You%20a%20Song.mp3",
+    "1d_half_a_heart": "https://pub-c5e31b5cdafb419a86a69d5d341ee602.r2.dev/One%20Direction%20-%20Half%20a%20Heart.mp3",
+    "1d_night_changes": "https://pub-c5e31b5cdafb419a86a69d5d341ee602.r2.dev/One%20Direction%20-%20Night%20Changes.mp3",
+    "1d_if_i_could_fly": "https://pub-c5e31b5cdafb419a86a69d5d341ee602.r2.dev/One%20Direction%20-%20If%20I%20Could%20Fly.mp3",
+    "btr_real_ikyk": "https://pub-c5e31b5cdafb419a86a69d5d341ee602.r2.dev/Big%20Time%20Rush%20-%20I%20Know%20You%20Know.mp3"
+}
 
 # Lógica del Radiotelescopio
 if frecuencia == 100.5:
@@ -79,7 +87,7 @@ if frecuencia == 100.5:
     </div>
     """, unsafe_allow_html=True)
     st.write("🎵 *Sintonizando: Little Things - One Direction*")
-    st.audio(REPO_RAW_URL + "1d_little_things.mp3.mp3")
+    st.audio(CANCIONES["1d_little_things"])
 
 elif frecuencia == 102.0:
     st.success("🛰️ ¡SEÑAL DETECTADA: Frecuencia de la Primera Cita (20/08/2025)!")
@@ -94,7 +102,7 @@ elif frecuencia == 102.0:
     </div>
     """, unsafe_allow_html=True)
     st.write("🎵 *Sintonizando: I Want to Write You a Song - One Direction*")
-    st.audio(REPO_RAW_URL + "1d_write_a_song.mp3.mp3")
+    st.audio(CANCIONES["1d_write_a_song"])
 
 elif frecuencia == 101.7:
     st.success("🛰️ ¡SEÑAL DETECTADA: Frecuencia del Gran Impacto (17/01/2026)!")
@@ -109,7 +117,7 @@ elif frecuencia == 101.7:
     </div>
     """, unsafe_allow_html=True)
     st.write("🎵 *Sintonizando: Half a Heart - One Direction*")
-    st.audio(REPO_RAW_URL + "1d_half_a_heart.mp3.mp3")
+    st.audio(CANCIONES["1d_half_a_heart"])
 
 elif frecuencia == 102.7:
     st.success("🛰️ ¡SEÑAL DETECTADA: Frecuencia de la Estrella Más Brillante (07/02)!")
@@ -124,7 +132,7 @@ elif frecuencia == 102.7:
     </div>
     """, unsafe_allow_html=True)
     st.write("🎵 *Sintonizando: Night Changes - One Direction*")
-    st.audio(REPO_RAW_URL + "1d_night_changes.mp3.mp3")
+    st.audio(CANCIONES["1d_night_changes"])
 
 elif frecuencia == 104.2:
     st.success("🛰️ ¡SEÑAL DETECTADA: Frecuencia del Combustible Espacial!")
@@ -139,7 +147,7 @@ elif frecuencia == 104.2:
     </div>
     """, unsafe_allow_html=True)
     st.write("🎵 *Sintonizando: If I Could Fly - One Direction*")
-    st.audio(REPO_RAW_URL + "1d_if_i_could_fly.mp3.mp3")
+    st.audio(CANCIONES["1d_if_i_could_fly"])
 
 else:
     # Ruido cósmico por defecto
@@ -151,7 +159,7 @@ else:
     """, unsafe_allow_html=True)
     
     st.write("📻 *Interceptando señal de fondo:*")
-    st.audio(REPO_RAW_URL + "btr_ikyk.mp3.mp3")
+    st.audio(CANCIONES["btr_real_ikyk"])
 
 # Pie de página fijo
 st.markdown("<br><br><p style='text-align: center; color: #475569; font-size: 0.8rem;'>Hecho con 💛 por tu nenito para su reina Luisaury</p>", unsafe_allow_html=True)

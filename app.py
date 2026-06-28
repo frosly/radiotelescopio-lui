@@ -1,6 +1,4 @@
 import streamlit as st
-import base64
-import os
 
 # Configuración de la página
 st.set_page_config(
@@ -40,35 +38,8 @@ st.markdown("""
         margin-top: 15px;
         box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.5);
     }
-    .audio-contenedor {
-        margin-top: 15px;
-        text-align: center;
-    }
-    audio {
-        width: 100%;
-        max-width: 400px;
-    }
     </style>
     """, unsafe_allow_html=True)
-
-# Función definitiva para reproducir el archivo local convertido a Base64
-def reproducir_audio_local(nombre_archivo):
-    # Buscamos el archivo en la carpeta interna del servidor
-    if os.path.exists(nombre_archivo):
-        with open(nombre_archivo, "rb") as f:
-            audio_bytes = f.read()
-        audio_base64 = base64.b64encode(audio_bytes).decode('utf-8')
-        audio_html = f"""
-        <div class="audio-contenedor">
-            <audio controls autoplay>
-                <source src="data:audio/mp3;base64,{audio_base64}" type="audio/mp3">
-                Tu navegador no soporta este reproductor.
-            </audio>
-        </div>
-        """
-        st.markdown(audio_html, unsafe_allow_html=True)
-    else:
-        st.error(f"⚠️ El archivo '{nombre_archivo}' no se encuentra en el satélite. Verifica el nombre en GitHub.")
 
 # Encabezado de la App
 st.title("🌌 Observatorio Espacial Personalizado")
@@ -90,14 +61,14 @@ frecuencia = st.slider(
 
 st.markdown("---")
 
-# Nombres exactos de tus archivos con el doble .mp3.mp3 que generó Windows
+# Enlaces directos optimizados para Streaming en la nube (No saturan la memoria de Streamlit)
 CANCIONES = {
-    "1d_little_things": "1d_little_things.mp3.mp3",
-    "1d_write_a_song": "1d_write_a_song.mp3.mp3",
-    "1d_half_a_heart": "1d_half_a_heart.mp3.mp3",
-    "1d_night_changes": "1d_night_changes.mp3.mp3",
-    "1d_if_i_could_fly": "1d_if_i_could_fly.mp3.mp3",
-    "btr_real_ikyk": "btr_ikyk.mp3.mp3"
+    "1d_little_things": "https://archive.org/download/1d-songs-rt/1d_little_things.mp3",
+    "1d_write_a_song": "https://archive.org/download/1d-songs-rt/1d_write_a_song.mp3",
+    "1d_half_a_heart": "https://archive.org/download/1d-songs-rt/1d_half_a_heart.mp3",
+    "1d_night_changes": "https://archive.org/download/1d-songs-rt/1d_night_changes.mp3",
+    "1d_if_i_could_fly": "https://archive.org/download/1d-songs-rt/1d_if_i_could_fly.mp3",
+    "btr_ikyk": "https://archive.org/download/1d-songs-rt/btr_ikyk.mp3"
 }
 
 # Lógica del Radiotelescopio
@@ -115,7 +86,7 @@ if frecuencia == 100.5:
     </div>
     """, unsafe_allow_html=True)
     st.write("🎵 *Sintonizando: Little Things - One Direction*")
-    reproducir_audio_local(CANCIONES["1d_little_things"])
+    st.audio(CANCIONES["1d_little_things"])
 
 elif frecuencia == 102.0:
     st.success("🛰️ ¡SEÑAL DETECTADA: Frecuencia de la Primera Cita (20/08/2025)!")
@@ -130,7 +101,7 @@ elif frecuencia == 102.0:
     </div>
     """, unsafe_allow_html=True)
     st.write("🎵 *Sintonizando: I Want to Write You a Song - One Direction*")
-    reproducir_audio_local(CANCIONES["1d_write_a_song"])
+    st.audio(CANCIONES["1d_write_a_song"])
 
 elif frecuencia == 101.7:
     st.success("🛰️ ¡SEÑAL DETECTADA: Frecuencia del Gran Impacto (17/01/2026)!")
@@ -145,7 +116,7 @@ elif frecuencia == 101.7:
     </div>
     """, unsafe_allow_html=True)
     st.write("🎵 *Sintonizando: Half a Heart - One Direction*")
-    reproducir_audio_local(CANCIONES["1d_half_a_heart"])
+    st.audio(CANCIONES["1d_half_a_heart"])
 
 elif frecuencia == 102.7:
     st.success("🛰️ ¡SEÑAL DETECTADA: Frecuencia de la Estrella Más Brillante (07/02)!")
@@ -160,7 +131,7 @@ elif frecuencia == 102.7:
     </div>
     """, unsafe_allow_html=True)
     st.write("🎵 *Sintonizando: Night Changes - One Direction*")
-    reproducir_audio_local(CANCIONES["1d_night_changes"])
+    st.audio(CANCIONES["1d_night_changes"])
 
 elif frecuencia == 104.2:
     st.success("🛰️ ¡SEÑAL DETECTADA: Frecuencia del Combustible Espacial!")
@@ -175,7 +146,7 @@ elif frecuencia == 104.2:
     </div>
     """, unsafe_allow_html=True)
     st.write("🎵 *Sintonizando: If I Could Fly - One Direction*")
-    reproducir_audio_local(CANCIONES["1d_if_i_could_fly"])
+    st.audio(CANCIONES["1d_if_i_could_fly"])
 
 else:
     # Ruido cósmico por defecto
@@ -187,7 +158,7 @@ else:
     """, unsafe_allow_html=True)
     
     st.write("📻 *Interceptando señal de fondo:*")
-    reproducir_audio_local(CANCIONES["btr_real_ikyk"])
+    st.audio(CANCIONES["btr_ikyk"])
 
 # Pie de página fijo
 st.markdown("<br><br><p style='text-align: center; color: #475569; font-size: 0.8rem;'>Hecho con 💛 por tu nenito para su reina Luisaury</p>", unsafe_allow_html=True)

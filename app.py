@@ -1,14 +1,13 @@
 import streamlit as st
-import time
 
-# Configuración de la página (Debe ser la primera línea de Streamlit)
+# Configuración de la página
 st.set_page_config(
     page_title="Radiotelescopio del Amor - Señales Cósmicas",
     page_icon="🌌",
     layout="centered"
 )
 
-# Estilos CSS personalizados para darle un look galáctico y romántico
+# Estilos CSS personalizados
 st.markdown("""
     <style>
     .main {
@@ -48,10 +47,9 @@ st.subheader("Proyecto: Radiotelescopio del Amor")
 st.write(f"**Operador del Sistema:** nenito | **Objetivo de Escaneo:** my queen (Luisaury)")
 st.markdown("---")
 
-st.write("✨ *Luisaury, arrastra el dial del radiotelescopio para sintonizar las frecuencias cósmicas y captar las señales ocultas que el universo tiene para ti hoy...*")
+st.write("✨ *Luisaury, arrastra el dial del radiotelescopio para sintonizar las frecuencias cósmicas y captar las señales ocultas...*")
 
-# El control deslizante (Dial de Frecuencia)
-# Rango de 100 a 105 MHz, con pasos pequeños para simular sintonización precisa
+# El control deslizante (Dial de Frecuencia de 100 a 105 MHz)
 frecuencia = st.slider(
     "🎛️ Ajustar Frecuencia del Radiotelescopio (MHz):",
     min_value=100.0,
@@ -63,10 +61,10 @@ frecuencia = st.slider(
 
 st.markdown("---")
 
-# Lógica del Radiotelescopio (Frecuencias Clave)
+# Lógica del Radiotelescopio
 if frecuencia == 100.5:
     st.success("🛰️ ¡SEÑAL DETECTADA: Frecuencia de Inicio de Órbita (29/06/2025)!")
-    st.balloons() # Animación bonita
+    st.balloons() 
     
     st.markdown("""
     <div class="mensaje-amor">
@@ -77,10 +75,23 @@ if frecuencia == 100.5:
         mi flor favorita en todo el cosmos.</p>
     </div>
     """, unsafe_allow_html=True)
+    st.write("🎵 *Sintonizando: Little Things - One Direction*")
+    st.audio("1d_little_things.mp3")
+
+elif frecuencia == 102.0:
+    st.success("🛰️ ¡SEÑAL DETECTADA: Frecuencia de la Primera Cita (20/08/2025)!")
+    st.balloons()
     
-    # Canción de One Direction de fondo (Enbeber reproductor de YouTube de forma limpia)
-    st.write("🎵 *Sintonizando música de fondo para este recuerdo...*")
-    st.video("https://www.youtube.com/watch?v=QJO3ROT-A4E") # Night Changes
+    st.markdown("""
+    <div class="mensaje-amor">
+        <h3>✍️ El primer capítulo de nuestra historia</h3>
+        <p><b>Frecuencia Estelar: 102.0 MHz</b></p>
+        <p>Un 20 de agosto empezamos a salir. No imaginaba que esos primeros encuentros se convertirían 
+        en la historia de amor más bonita de mi vida. Fue el inicio de todo lo que somos hoy.</p>
+    </div>
+    """, unsafe_allow_html=True)
+    st.write("🎵 *Sintonizando: I Want to Write You a Song - One Direction*")
+    st.audio("1d_write_a_song.mp3")
 
 elif frecuencia == 101.7:
     st.success("🛰️ ¡SEÑAL DETECTADA: Frecuencia del Gran Impacto (17/01/2026)!")
@@ -91,11 +102,11 @@ elif frecuencia == 101.7:
         <h3>💖 El Inicio Oficial de Nuestra Galaxia</h3>
         <p><b>Frecuencia Estelar: 101.7 MHz</b></p>
         <p>El 17 de enero de 2026 dejó de ser una fecha cualquiera para convertirse en el día en que nos hicimos novios. 
-        Por eso, los 17 de cada mes son nuestro cumple mes, el día en que celebramos que decidimos viajar juntos 
-        por este universo. ¡Te amo con todo mi corazón, my queen!</p>
+        Por eso, los 17 de cada mes son nuestro cumple mes. ¡Te amo con todo mi corazón, my queen!</p>
     </div>
     """, unsafe_allow_html=True)
-    st.video("https://www.youtube.com/watch?v=W-TE_Ys4iwM") # Steal My Girl
+    st.write("🎵 *Sintonizando: Half a Heart - One Direction*")
+    st.audio("1d_half_a_heart.mp3")
 
 elif frecuencia == 102.7:
     st.success("🛰️ ¡SEÑAL DETECTADA: Frecuencia de la Estrella Más Brillante (07/02)!")
@@ -105,12 +116,12 @@ elif frecuencia == 102.7:
     <div class="mensaje-amor">
         <h3>🎂 El destello más hermoso del cosmos</h3>
         <p><b>Frecuencia Estelar: 102.7 MHz</b></p>
-        <p>El 7 de febrero el universo celebra, porque nació la persona que llena mis días de luz. 
-        Eres hermosa, inteligente y mi compañera perfecta. Si pudiera, te regalaría un campo infinito de 
-        girasoles en la Luna.</p>
+        <p>El 7 de febrero nació la persona que llena mis días de luz. Eres hermosa, inteligente y mi compañera perfecta. 
+        Si pudiera, te regalaría un campo infinito de girasoles en la Luna.</p>
     </div>
     """, unsafe_allow_html=True)
-    st.video("https://www.youtube.com/watch?v=AbPED9bisSc") # Perfect
+    st.write("🎵 *Sintonizando: Night Changes - One Direction*")
+    st.audio("1d_night_changes.mp3")
 
 elif frecuencia == 104.2:
     st.success("🛰️ ¡SEÑAL DETECTADA: Frecuencia del Combustible Espacial!")
@@ -120,20 +131,24 @@ elif frecuencia == 104.2:
         <h3>🍝 Transmisión Especial: El Menú Intergaláctico</h3>
         <p><b>Frecuencia Estelar: 104.2 MHz</b></p>
         <p>Los sistemas del radiotelescopio indican que la energía de la reina está baja. 
-        Se sugiere recargar baterías inmediatamente con un plato gigante de su comida favorita: 
-        <b>¡Pasta con carne molida preparada por su nenito!</b> ¿Te provoca una cita astronómica?</p>
+        Se sugiere recargar baterías con un plato gigante de su comida favorita: 
+        <b>¡Pasta con carne molida preparada por su nenito!</b> ¿Te provoca una cita?</p>
     </div>
     """, unsafe_allow_html=True)
-    st.video("https://www.youtube.com/watch?v=b-RQIN3wo5U") # What Makes You Beautiful
+    st.write("🎵 *Sintonizando: If I Could Fly - One Direction*")
+    st.audio("1d_if_i_could_fly.mp3")
 
 else:
-    # Pantalla por defecto cuando está buscando frecuencias
+    # Ruido cósmico por defecto
     st.markdown(f"""
     <div class="estatica">
         <p>📡 ESCANEANDO EL ESPACIO PROFUNDO... Frecuencia actual: <b>{frecuencia} MHz</b></p>
-        <p style="font-size: 0.8rem; color: #475569;">[Ruido cósmico: ░░▒▒▓▓🎚️▓▓▒▒░░] Tip: Intenta buscar en 100.5, 101.7, 102.7 o 104.2</p>
+        <p style="font-size: 0.8rem; color: #475569;">[Ruido cósmico: ░░▒▒▓▓🎚️▓▓▒▒░░] Pistas: Busca en 100.5, 101.7, 102.0, 102.7 o 104.2</p>
     </div>
     """, unsafe_allow_html=True)
+    
+    st.write("📻 *Interceptando señal de fondo:*")
+    st.audio("btr_ikyk.mp3")
 
 # Pie de página fijo
-st.markdown("<br><br><p style='text-align: center; color: #475569; font-size: 0.8rem;'>Hecho con 💛 y código por tu nenito para su reina Luisaury</p>", unsafe_allow_html=True)
+st.markdown("<br><br><p style='text-align: center; color: #475569; font-size: 0.8rem;'>Hecho con 💛 por tu nenito para su reina Luisaury</p>", unsafe_allow_html=True)
